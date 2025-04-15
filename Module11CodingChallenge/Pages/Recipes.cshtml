@@ -1,0 +1,40 @@
+﻿@page
+@model Module11CodingChallenge.Pages.RecipesModel
+@{
+    ViewData["Title"] = "Recipes";
+}
+
+<!-- Page heading -->
+<h1>Recipe Selector</h1>
+
+<!-- Form to submit the selected recipe -->
+<form method="post">
+    <!-- Dropdown bound to SelectedRecipeId -->
+    <select asp-for="SelectedRecipeId" asp-items="Model.RecipeList" class="form-control">
+        <option value="">Select a Recipe</option> <!-- Placeholder option -->
+    </select>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary mt-2">Show Recipe</button>
+</form>
+
+<!-- Only show this section if a recipe has been selected -->
+@if (Model.SelectedRecipe != null)
+{
+    <div class="mt-4">
+        <!-- Recipe Name -->
+        <h2>@Model.SelectedRecipe.Name</h2>
+
+        <!-- Recipe Description -->
+        <p><strong>Description:</strong> @Model.SelectedRecipe.Description</p>
+
+        <!-- Recipe Ingredients -->
+        <p><strong>Ingredients:</strong> @Model.SelectedRecipe.Ingredients</p>
+
+        <!-- Recipe Instructions -->
+        <p><strong>Instructions:</strong> @Model.SelectedRecipe.Instructions</p>
+
+        <!-- Display recipe image -->
+        <img src="/images/@Model.SelectedRecipe.ImageFileName" alt="@Model.SelectedRecipe.Name" style="max-width: 300px;" />
+    </div>
+}
